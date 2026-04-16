@@ -11,6 +11,6 @@ int main() {
     inFS.close();
     std::string lcs = solver.findlcs(a, b);
     std::cout << "Longest Common Subsequence: " << lcs << std::endl;
-    std::cout << "Length = " << lcs.size();
+    std::cout << "Length = " << lcs.size() << " = " << solver.findlcslen(a, b) << " = " << solver.compare(a, b);
     return 0;
 }
