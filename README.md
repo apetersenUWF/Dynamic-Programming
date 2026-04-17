@@ -37,23 +37,6 @@ The program will output the two strings from "twoStrings.txt" followed by their 
 The program will also output a table showing the result of comparing each string to every other string from the
 "multiStrings.txt" file. The output will look similar to this
 
---------------------------------------------------  
-Original Strings:  
-1: "string1"   
-2: "string2"    
-Longest Common Subsequence:  
-Length = 794  
-"LCS"  
---------------------------------------------------  
-   00 01 02 03 04 05 06 07   
-00  -  D  D  D  L  D  M  D   
-01  -  -  D  D  D  D  D  H   
-02  -  -  -  H  D  H  D  D   
-03  -  -  -  -  D  H  D  D   
-04  -  -  -  -  -  D  M  D   
-05  -  -  -  -  -  -  D  D   
-06  -  -  -  -  -  -  -  D   
-07  -  -  -  -  -  -  -  -
-
 ![alt text](image.png)
+
 After this, the program will terminate. Feel free to try different strings to see how the output changes.
