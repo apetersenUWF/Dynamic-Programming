@@ -53,6 +53,7 @@ Length = 794
 04  -  -  -  -  -  D  M  D   
 05  -  -  -  -  -  -  D  D   
 06  -  -  -  -  -  -  -  D   
-07  -  -  -  -  -  -  -  -   
+07  -  -  -  -  -  -  -  -
 
+![alt text](image.png)
 After this, the program will terminate. Feel free to try different strings to see how the output changes.
