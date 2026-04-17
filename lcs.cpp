@@ -1,6 +1,80 @@
+/***************************************************************
+  Ayden Petersen
+  lcs.hpp
+  Project 5
+
+  This file contains definitions for the LCS class functions.
+  The purpose of this class is to provide the user with the ability
+  to find the longest common subsequence of two strings using
+  an efficient dynamic programming method.
+
+  Two methods are provided:
+  
+  -findlcs() which uses O(m*n) memory space and O(m*n) time complexity. 
+  This function returns the lcs.
+
+  -findlcslen() which uses only O(2*n) memory and O(n^2) time complexity.
+  This function returns only the length of the lcs.
+
+***************************************************************/
 #include "lcs.hpp"
 #include "stack.hpp"
+//CONSTRUCTOR///////////////////////////////////////////////////////
 LCS::LCS() {}
+
+//PRIVATE HELPERS///////////////////////////////////////////////////////
+float LCS::lengthRatio(std::string& x, std::string& y) {
+    float lengthRatio = static_cast<float>(x.size()) / y.size();
+    return lengthRatio;
+}
+
+int LCS::findlcslen(std::string& x, std::string& y) {
+    if (x.size() == 0 || y.size() == 0) return 0;
+    int maxLength = 0;
+    int rows = x.size() + 1;
+    int cols = y.size() + 1;
+    int* upper = new int[cols];
+    int* curr = new int[cols];
+    for (int i = 0; i < cols; i++) upper[i] = 0; //first row is zero
+    for (int i = 0; i < rows - 1; i++) {
+        curr[0] = 0;
+        char xChar = x[i];
+        for (long unsigned int j = 0; j < y.size(); j++) {
+            if (y[j] == xChar) {//match found
+                int length;
+                length = curr[j + 1] = upper[j] + 1;
+                if (length > maxLength) maxLength = length;
+            }
+            else {//letters dont match
+                if (upper[j+1] >= curr[j]){//cell above is greater than the one to the left
+                    curr[j+1] = upper[j+1]; //copy its value
+                }
+                else {//cell to the left must be greater
+                    curr[j+1] = curr[j]; //copy that value
+                }
+            }
+        }
+        std::swap(upper, curr);//upper is now the curr row, curr will be overwritten on the next loop
+    }
+    delete [] upper;
+    delete [] curr;
+    return maxLength;
+}
+//MAIN LOGIC///////////////////////////////////////////////////////
+char LCS::compare(std::string& x, std::string& y) {
+    char identifier = '$';
+    float sizeRatio = lengthRatio(x, y);
+    if (sizeRatio < 0.6 || sizeRatio > 1.4) {return 'D';} //not within 40% of each other, strings are dissimilar
+    int lcslength = findlcslen(x, y);
+    int shortestStrLength;
+    if (x.size() >= y.size()) shortestStrLength = y.size();
+    else shortestStrLength = x.size();
+    float lcsRatio = static_cast<float>(lcslength)/shortestStrLength;
+    if (lcsRatio >= 0.5) {identifier = 'L';}
+    if (lcsRatio >= 0.8) {identifier = 'M';}
+    if (lcsRatio >= 0.9) {identifier = 'H';}
+    return identifier;
+}
 
 std::string& LCS::findlcs(std::string& x, std::string& y) {
     lcsStr = ""; //reset the lcs
@@ -51,57 +125,3 @@ std::string& LCS::findlcs(std::string& x, std::string& y) {
     delete lcs;
     return lcsStr;
 }
-
-float LCS::lengthRatio(std::string& x, std::string& y) {
-    float lengthRatio = static_cast<float>(x.size()) / y.size();
-    return lengthRatio;
-}
-
-int LCS::findlcslen(std::string& x, std::string& y) {
-    if (x.size() == 0 || y.size() == 0) return 0;
-    int maxLength = 0;
-    int rows = x.size() + 1;
-    int cols = y.size() + 1;
-    int* upper = new int[cols];
-    int* curr = new int[cols];
-    for (int i = 0; i < cols; i++) upper[i] = 0; //first row is zero
-    for (int i = 0; i < rows - 1; i++) {
-        curr[0] = 0;
-        char xChar = x[i];
-        for (long unsigned int j = 0; j < y.size(); j++) {
-            if (y[j] == xChar) {//match found
-                int length;
-                length = curr[j + 1] = upper[j] + 1;
-                if (length > maxLength) maxLength = length;
-            }
-            else {//letters dont match
-                if (upper[j+1] >= curr[j]){//cell above is greater than the one to the left
-                    curr[j+1] = upper[j+1]; //copy its value
-                }
-                else {//cell to the left must be greater
-                    curr[j+1] = curr[j]; //copy that value
-                }
-            }
-        }
-        std::swap(upper, curr);//upper is now the curr row, curr will be overwritten on the next loop
-    }
-    delete [] upper;
-    delete [] curr;
-    return maxLength;
-}
-
-char LCS::compare(std::string& x, std::string& y) {
-    char identifier = '$';
-    float sizeRatio = lengthRatio(x, y);
-    if (sizeRatio < 0.6 || sizeRatio > 1.4) {return 'D';} //not within 40% of each other, strings are dissimilar
-    int lcslength = findlcslen(x, y);
-    int shortestStrLength;
-    if (x.size() >= y.size()) shortestStrLength = y.size();
-    else shortestStrLength = x.size();
-    float lcsRatio = static_cast<float>(lcslength)/shortestStrLength;
-    if (lcsRatio >= 0.5) {identifier = 'L';}
-    if (lcsRatio >= 0.8) {identifier = 'M';}
-    if (lcsRatio >= 0.9) {identifier = 'H';}
-    return identifier;
-}
-

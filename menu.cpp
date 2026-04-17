@@ -1,11 +1,23 @@
+/***************************************************************
+  Ayden Petersen
+  menu.cpp
+  Project 5
+
+  This file contains the definitions for the Menu class functions.
+  These functions are designed to interface with the LCS algorithms by
+  retrieving and processing data from files. Default files are listed
+  in menu.hpp as FILENAME1 and FILENAME2.
+
+***************************************************************/
 #include "menu.hpp"
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-
+//CONSTRUCTORS/DESTRUCTORS///////////////////////////////////////////////////////
 Menu::Menu() {solver = new LCS();}
 Menu::~Menu() {delete solver;}
 
+//DATA RETRIEVAL/PRINT FORMATTING///////////////////////////////////////////////////////
 void Menu::printLCSStr(const std::string& filename) {
     std::ifstream inFS;
     inFS.open(filename);
@@ -53,7 +65,6 @@ void Menu::printCompareTable(const std::string& filename) {
     }
 }
 
-
 std::string Menu::fileLookup(const int i, const std::string& filename) {
     std::ifstream inFS;
     inFS.open(filename);
@@ -66,8 +77,7 @@ std::string Menu::fileLookup(const int i, const std::string& filename) {
     inFS.close();
     return line;
 }
-
-
+////////////////////////////////////////////////////////////////////////
 void Menu::run() {
     printLCSStr();
     printCompareTable();
