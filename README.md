@@ -1,14 +1,14 @@
 # Dynamic-Programming-Project
 
 This program contains two solutions to the Longest Common Subsequence Problem (LCS). One which computes 
-and returns the string that is the LCS of two strings using O(m*n) memory, and another which returns only 
+and returns the string that is the LCS of two strings using O(m x n) memory, and another which returns only 
 the length of the LCS using O(2 x m) memory. Both algorithms use dynamic programming to find the solution in O(n x m)
 time for what would otherwise be a O(n!) problem using naive brute-force methods.  
 
 The LCS problem has applications in biology, data analysis, text editors, and many other fields.  
 
 The purpose of the program is to allow the user to input strings into a file and find their lcs and/or compare the
-similarity of the strings. The strings can be of any length. Any two strings can be assigned a character that represents
+similarity of the strings. The strings can be of any length. Each pair of strings will be assigned a character that represents
 their level of similarity. Criteria are:  
 
 **H = high similarity between the strings**  
@@ -27,13 +27,13 @@ This will generate an executable called "run".
 Verify that the data files "twoStrings.txt" and "multiStrings.txt" are in the same directory as the executable.  
 Verify that the "twoStrings.txt" file contains exactly two strings, one on each line, which you would like  
 to find the lcs for.  
-Verify that the "multiStrings.txt" filke contains the number of strings on the first line, followed by exactly  
+Verify that the "multiStrings.txt" file contains the number of strings on the first line, followed by exactly  
 that number of strings, one on each line. These strings will each be compared to every other string by the above criteria, the  
 actual LCS string will not be found only the length.  
 
 Issue the command "./run" in the command line to run the executable.
 No user interaction is required beyond this point.
-The program will output the two strings from "twoStrings.txt" followed by their LCSA length, and the LCS itself.
+The program will output the two strings from "twoStrings.txt" followed by their LCS length, and the LCS itself.
 The program will also output a table showing the result of comparing each string to every other string from the
 "multiStrings.txt" file. The output will look similar to this
 
