@@ -62,9 +62,9 @@ int LCS::findlcslen(std::string& x, std::string& y) {
 }
 //MAIN LOGIC///////////////////////////////////////////////////////
 char LCS::compare(std::string& x, std::string& y) {
-    char identifier = '$';
+    char identifier = 'D';
     float sizeRatio = lengthRatio(x, y);
-    if (sizeRatio < 0.6 || sizeRatio > 1.4) {return 'D';} //not within 40% of each other, strings are dissimilar
+    if (sizeRatio < 0.6 || sizeRatio > 1.4) {return identifier;} //not within 40% of each other, strings are dissimilar
     int lcslength = findlcslen(x, y);
     int shortestStrLength;
     if (x.size() >= y.size()) shortestStrLength = y.size();
